@@ -10,6 +10,8 @@ public class Game {
 	Deck playedDeck = new Deck(false);
 	Player winner = null;
 	
+	final String CARD_ON_TABLE = "Kortet er på bordet er %s og det er %s sin tur...";
+	
 
 	/**
 	 * @param args
@@ -21,21 +23,31 @@ public class Game {
 	public Game(){
 		Scanner gameScanner = new Scanner(System.in);
 		
-		System.out.println("Velkommen til VRI ÅTTER!");
+		System.out.println("VELKOMMEN TIL VRI ÅTTER!");
 		
 		System.out.println("\n\nHvor mange skal spille?");
-		int playerCount = gameScanner.nextInt();
-		addPlayers(playerCount);
+		addPlayers(gameScanner.nextInt());
 		
 		System.out.println("\n" + players.size() + " spillere lagt til.");
-		System.out.println("Kort deles ut...");
+		System.out.println("\n\nKort deles ut...");
 		dealCards();
 		
 		Iterator<Player> gameIterator = players.iterator();
 		while (winner == null){
-			System.out.println("\nKortet på bordet er " + playedDeck.topCard() + " og det er " + gameIterator.next().name + " sin tur...");
-			
+			Player currentPlayer = gameIterator.next();
+			System.out.println(String.format(CARD_ON_TABLE, playedDeck.topCard(),currentPlayer.getName()));
+			Iterator<Card> cardIterator = currentPlayer.getHand().iterator();
+			int cardNo = 0;
+			while(cardIterator.hasNext()){
+				System.out.println(String.format("%s: %s", cardNo++, cardIterator.next()));
+			}
+			System.out.println("Velg et kort å spille...");
+			int selectedAction = gameScanner.nextInt();
+			playedDeck.addCard(currentPlayer.takeCard(selectedAction));
+			if(!gameIterator.hasNext()) gameIterator = players.iterator();
 		}
+		
+		gameScanner.close();
 	}
 	
 	public void addPlayers(int playerCount){
@@ -43,19 +55,20 @@ public class Game {
 		
 		for (int i = 0; i < playerCount; i++){
 			System.out.println("Navn på spiller " + Integer.toString(i + 1));
-			String playerName = addPlayerScanner.nextLine();
-			players.add(new Player(playerName));
+			players.add(new Player(addPlayerScanner.nextLine()));
 		}
 		
 		addPlayerScanner.close();
 	}
 	
 	public void dealCards(){
-		Iterator<Player> playerIterator = players.iterator();
+		freshDeck.shuffleCards();
 		
 		for (int i = 0; i < 5; i++){
-			while (playerIterator.hasNext()){
-				playerIterator.next().hand.add(freshDeck.takeCard());
+			Iterator<Player> dealCardsIterator = players.iterator();
+			
+			while (dealCardsIterator.hasNext()){
+				dealCardsIterator.next().addCard(freshDeck.takeCard());
 			}
 		}
 		

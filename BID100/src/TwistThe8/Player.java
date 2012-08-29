@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Player {
-	String name;
-	ArrayList<Card> hand;
+	private String name;
+	private ArrayList<Card> hand;
 	
 	public Player(String playerName){
 		name = playerName;
@@ -26,5 +26,21 @@ public class Player {
 		}
 		
 		return outString;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	public void addCard(Card cardGiven){
+		hand.add(cardGiven);
+	}
+	
+	public Card takeCard(int cardIndex){
+		return hand.remove(cardIndex);
+	}
+	
+	public ArrayList<Card> getHand(){
+		return hand;
 	}
 }
