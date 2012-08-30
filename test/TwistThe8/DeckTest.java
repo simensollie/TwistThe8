@@ -6,29 +6,32 @@ import org.junit.Test;
 
 public class DeckTest {
 
+	Deck deck;
+	Deck deck2;
+	
 	@Test
 	public void testDeck() {
-		Deck deck = new Deck();
+		deck = new Deck(true);
 		assertTrue(deck.isEmpty());
 	}
 
 	@Test
 	public void testFillDeck() {
-		Deck deck = new Deck();
+		deck = new Deck(null);
 		deck.fillDeck();
 		assertEquals(52, deck.cardsLeft());
 	}
 
 	@Test
 	public void testTakeCard() {
-		Deck deck = new Deck();
+		deck = new Deck(null);
 		deck.addCard(new Card("Spar", 13));
 		assertEquals("Spar Kong", deck.takeCard().toString());
 	}
 
 	@Test
 	public void testAddCard() {
-		Deck deck = new Deck();
+		deck = new Deck(null);
 		Card card = new Card("Hjerter", 5);
 		deck.addCard(card);
 		assertEquals(card, deck.topCard());
@@ -36,14 +39,14 @@ public class DeckTest {
 
 	@Test
 	public void testTopCard() {
-		Deck deck = new Deck();
+		deck = new Deck(null);
 		deck.fillDeck();
 		assertEquals("Spar Kong", deck.topCard().toString());
 	}
 
 	@Test
 	public void testCardsLeft() {
-		Deck deck = new Deck();
+		deck = new Deck(null);
 		assertEquals(0, deck.cardsLeft());
 		
 		deck.fillDeck();
@@ -52,7 +55,7 @@ public class DeckTest {
 
 	@Test
 	public void testIsEmpty() {
-		Deck deck = new Deck();
+		deck = new Deck(null);
 		assertTrue(deck.isEmpty());
 		
 		deck.fillDeck();
@@ -61,7 +64,7 @@ public class DeckTest {
 
 	@Test
 	public void testRemoveCard() {
-		Deck deck = new Deck();
+		deck = new Deck(null);
 		deck.fillDeck();
 		deck.removeCard(8);
 		assertEquals(51, deck.cardsLeft());

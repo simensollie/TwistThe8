@@ -3,6 +3,12 @@ package TwistThe8;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * @author Jon Stødle
+ * @author Simen Sollie
+ * @since 2012-08-29
+ */
+
 public class Player {
 	private String name;
 	private ArrayList<Card> hand;

@@ -10,7 +10,7 @@ public class Game {
 	Deck playedDeck = new Deck(false);
 	Player winner = null;
 	
-	final String CARD_ON_TABLE = "Kortet er på bordet er %s og det er %s sin tur...";
+	final String CARD_ON_TABLE = "Kortet på bordet er %s og det er %s sin tur...";
 	
 
 	/**
@@ -25,7 +25,7 @@ public class Game {
 		
 		System.out.println("VELKOMMEN TIL VRI ÅTTER!");
 		
-		System.out.println("\n\nHvor mange skal spille?");
+		System.out.print("\n\nHvor mange skal spille? ");
 		addPlayers(gameScanner.nextInt());
 		
 		System.out.println("\n" + players.size() + " spillere lagt til.");
@@ -54,7 +54,7 @@ public class Game {
 		Scanner addPlayerScanner = new Scanner(System.in);
 		
 		for (int i = 0; i < playerCount; i++){
-			System.out.println("Navn på spiller " + Integer.toString(i + 1));
+			System.out.print("Navn på spiller " + Integer.toString(i + 1) + ": ");
 			players.add(new Player(addPlayerScanner.nextLine()));
 		}
 		

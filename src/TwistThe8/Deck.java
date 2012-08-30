@@ -3,6 +3,12 @@ package TwistThe8;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author Jon Stødle
+ * @author Simen Sollie
+ * @since 2012-08-27
+ */
+
 public class Deck {
 	private String[] suits;
 	private ArrayList<Card> cardDeck;
@@ -51,7 +57,14 @@ public class Deck {
 	}
 	
 	public void removeCard(int paramIndex){
+		/*Card remCard = null;
+		for (Card card : cardDeck)
+			if (card.getSuit().equals(suits) && card.getFace() == remFace)
+				remCard = card;
+		cardDeck.remove(remCard);
+		*/
 		if (paramIndex > cardsLeft()) throw new IndexOutOfBoundsException("Det er kun " + cardsLeft() + " igjen i stokken");
 		else cardDeck.remove(paramIndex);
+		
 	}
 }
